@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  udp_receiver:
+    build: ./AR_UDP_Receiver
+    container_name: udp_receiver
+    networks:
+      - udp-net
+    stdin_open: true
+    tty: true
+
+  udp_sender:
+    build: ./AR_UDP_Sender
+    container_name: udp_sender
+    networks:
+      - udp-net
+    stdin_open: true
+    tty: true
+    depends_on:
+      - udp_receiver
+
+networks:
+  udp-net:
