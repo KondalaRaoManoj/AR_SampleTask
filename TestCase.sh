@@ -1,6 +1,6 @@
 #!/bin/bash
 
-docker start udp_sender > /dev/null 2>&1
+docker start -it udp_sender > /dev/null 2>&1
 sleep 1 # a small delay to initialize the container
 docker exec -i udp_sender ./ar_udp_sender <<EOF
 1
