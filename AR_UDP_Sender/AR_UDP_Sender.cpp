@@ -10,8 +10,6 @@ int main()
 
     int ar_sockfd;  // Socket file descriptor as a part of posix standard
     struct sockaddr_in ar_receiver_addr; // store the receiver address
-
-
     ar_sockfd = socket(AF_INET, SOCK_DGRAM, 0); //socket number assigned after udp socket is created
 
     if (ar_sockfd < 0) { //check whether the udp socket is created or not.
