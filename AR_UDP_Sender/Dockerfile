@@ -1,9 +1,15 @@
-FROM gcc:latest
+FROM ubuntu:22.04
+
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    cmake \
+    iputils-ping && \
+    rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
-COPY AR_UDP_Sender.cpp .
+COPY . .
 
-RUN g++ -o ar_udp_sender AR_UDP_Sender.cpp
+RUN cmake . && make
 
-CMD ["./ar_udp_sender"]
+CMD ["./AR_UDP_Sender"]

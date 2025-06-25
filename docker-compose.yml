@@ -1,23 +1,26 @@
 version: '3.8'
 
 services:
-  udp_receiver:
-    build: ./AR_UDP_Receiver
-    container_name: udp_receiver
-    networks:
-      - udp-net
-    stdin_open: true
-    tty: true
-
   udp_sender:
-    build: ./AR_UDP_Sender
+    build:
+      context: ./AR_UDP_Sender
     container_name: udp_sender
     networks:
-      - udp-net
+      - udpnet
+    restart: unless-stopped
+    tty: true      # keeps container running to see logs if needed
     stdin_open: true
+
+  udp_receiver:
+    build:
+      context: ./AR_UDP_Receiver
+    container_name: udp_receiver
+    networks:
+      - udpnet
+    restart: unless-stopped
     tty: true
-    depends_on:
-      - udp_receiver
+    stdin_open: true
 
 networks:
-  udp-net:
+  udpnet:
+    driver: bridge
